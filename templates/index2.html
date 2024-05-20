@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindrome Checker</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Checa Palíndromo</h1>
+        <form method="POST">
+            <label for="name">Insira um nome:</label>
+            <input type="text" id="name" name="name" required>
+            <button type="submit">Check</button>
+        </form>
+
+        {% if name %}
+        <div class="result">
+            <p>Nome Original: {{ name }}</p>
+            <p>Nome Espelhado: {{ reversed_name }}</p>
+            <p>É Palindromo: {{ 'Yes' if palindrome else 'No' }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

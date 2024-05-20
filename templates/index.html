@@ -1,25 +1,77 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Palindrome Checker</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <title>Checa Palíndromo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: calc(100% - 24px);
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        .palindrome {
+            color: green;
+        }
+        .not-palindrome {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>Checa Palíndromo</h1>
-        <form method="POST">
-            <label for="name">Insira um nome:</label>
-            <input type="text" id="name" name="name" required>
-            <button type="submit">Check</button>
+        <form method="post">
+            <input type="text" name="name" placeholder="Insira um nome" required>
+            <input type="submit" value="Check">
         </form>
-
         {% if name %}
         <div class="result">
-            <p>Nome Original: {{ name }}</p>
-            <p>Nome Espelhado: {{ reversed_name }}</p>
-            <p>É Palindromo: {{ 'Yes' if palindrome else 'No' }}</p>
+            <p>Nome: {{ name }}</p>
+            <p>Nome Reverso: {{ reversed_name }}</p>
+            {% if palindrome %}
+            <p class="palindrome">É um palíndromo!</p>
+            {% else %}
+            <p class="not-palindrome">Não é um palíndromo.</p>
+            {% endif %}
         </div>
         {% endif %}
     </div>
