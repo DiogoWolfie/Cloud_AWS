@@ -7,40 +7,43 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
+            background-color: #eef2f7;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            color: #333;
+            margin: 0;
         }
         .container {
-            text-align: center;
             background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
         }
         h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
             color: #333;
         }
         input[type="text"] {
+            width: calc(100% - 20px);
             padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 4px;
-            width: calc(100% - 24px);
-            margin-bottom: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
         }
         input[type="submit"] {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
             background-color: #007BFF;
             color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
+            width: 100%;
         }
         input[type="submit"]:hover {
             background-color: #0056b3;
@@ -48,13 +51,31 @@
         .result {
             margin-top: 20px;
         }
-        .palindrome {
-            color: green;
+        .popup {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
         }
-        .not-palindrome {
-            color: red;
+        .popup.show {
+            display: block;
         }
     </style>
+    <script>
+        function showPopup(message) {
+            const popup = document.getElementById('popup');
+            popup.textContent = message;
+            popup.classList.add('show');
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 3000);
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -65,15 +86,19 @@
         </form>
         {% if name %}
         <div class="result">
-            <p>Nome: {{ name }}</p>
-            <p>Nome Reverso: {{ reversed_name }}</p>
-            {% if palindrome %}
-            <p class="palindrome">É um palíndromo!</p>
-            {% else %}
-            <p class="not-palindrome">Não é um palíndromo.</p>
-            {% endif %}
+            <p><strong>Nome:</strong> {{ name }}</p>
+            <p><strong>Nome Reverso:</strong> {{ reversed_name }}</p>
         </div>
+        <script>
+            const isPalindrome = "{{ palindrome }}";
+            if (isPalindrome === 'True') {
+                showPopup('É um palíndromo!');
+            } else {
+                showPopup('Não é um palíndromo.');
+            }
+        </script>
         {% endif %}
     </div>
+    <div id="popup" class="popup"></div>
 </body>
 </html>
