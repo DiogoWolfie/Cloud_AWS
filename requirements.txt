@@ -1,4 +1,4 @@
-Flask
+Flask>=2.2.2
 boto3
 Jinja2
 Werkzeug
