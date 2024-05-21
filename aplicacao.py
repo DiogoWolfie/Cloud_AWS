@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, redirect
+from flask import Flask, render_template, request
 import boto3
 import uuid
 import logging
@@ -8,8 +8,8 @@ app = Flask(__name__)
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
 
-dynamodb = boto3.resource('dynamodb', region_name='us-west-2')
-table = dynamodb.Table('DynamoDBTable')
+dynamodb = boto3.resource('dynamodb', region_name='us-east-2')
+table = dynamodb.Table('MyDynamoDBTable')
 
 def is_palindrome(s):
     return s == s[::-1]
@@ -37,14 +37,12 @@ def palindromo():
         else:
             return render_template('index.html')
     except Exception as e:
-        return logging.error(f"Error processing request: {e}")
-
+        logging.error(f"Error processing request: {e}")
+        return "An error occurred while processing the request", 500
 
 @app.route('/health')
 def health():
     return "OK", 200
-
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
