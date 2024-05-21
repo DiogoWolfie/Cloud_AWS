@@ -8,6 +8,7 @@ app = Flask(__name__)
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
 
+# Initialize DynamoDB resource
 dynamodb = boto3.resource('dynamodb', region_name='us-east-2')
 table = dynamodb.Table('MyDynamoDBTable')
 
